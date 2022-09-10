@@ -35,14 +35,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_pd" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pd_nome" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_buscar"
         android:text="Buscar"
         android:textColor="#FFFF"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
         android:layout_width="300dp"
+        app:backgroundTint="#3e5a8f"
         android:layout_height="35dp"
         android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"

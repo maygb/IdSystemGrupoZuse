@@ -102,25 +102,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_contato_nome" />
 
-    <EditText
-        android:id="@+id/et_contato_email"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/etshape"
-        android:hint="E-mail"
-        android:paddingStart="5dp"
-        android:textColor="#a9a9a9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_contato_tel" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_voltar_inicio"
         android:text="Voltar"
         android:textColor="#FFFF"
         android:textSize="14sp"
+        app:backgroundTint="#3e5a8f"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
         android:layout_width="300dp"
