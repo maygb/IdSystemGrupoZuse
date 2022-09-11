@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.idsystem.data.RetrofitFactory
 import com.example.idsystem.databinding.ActivityBuscaRegistroBinding
 import com.example.idsystem.domain.Cadastro
+import com.example.idsystem.domain.Pessoas
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,9 +32,9 @@ class BuscaRegistroActivity : AppCompatActivity() {
 
             progress.visibility = View.VISIBLE
 
-            call.enqueue(object : Callback<Cadastro> {
+            call.enqueue(object : Call<Pessoas> {
 
-                override fun onResponse(call: Call<Cadastro>, response: Response<Cadastro>) {
+                override fun onResponse(call: Call<Pessoas>, response: Response<Pessoas>) {
 
                     response.body()?.let {
                         Log.i("CPF", it.toString())
@@ -43,7 +44,7 @@ class BuscaRegistroActivity : AppCompatActivity() {
                         .show()
                 }
 
-                override fun onFailure(call: Call<Cadastro>?, t: Throwable?) {
+                override fun onFailure(call: Call<Pessoas>?, t: Throwable?) {
                     t?.message?.let { it1 -> Log.e("Erro", it1) }
                     progress.visibility = View.INVISIBLE
                 }

@@ -3,15 +3,13 @@ package com.example.idsystem.ui.statement
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.example.idsystem.R
 import com.example.idsystem.data.State
 import com.example.idsystem.databinding.ActivityBuscaBinding
-import com.example.idsystem.databinding.ActivityBuscaRegistroBinding
 import com.example.idsystem.domain.Cadastro
 import com.example.idsystem.ui.welcome.WelcomeActivity
+import com.google.android.material.snackbar.Snackbar
 import java.lang.IllegalArgumentException
 
 class BuscaActivity : AppCompatActivity() {
@@ -24,7 +22,7 @@ class BuscaActivity : AppCompatActivity() {
         ActivityBuscaBinding.inflate(layoutInflater)
     }
 
-    private val cpf by lazy {
+    private val cadastro by lazy {
         intent.getParcelableExtra<Cadastro>(CADASTRO_DESAPARECIDO) ?: throw IllegalArgumentException()
     }
 
@@ -34,23 +32,23 @@ class BuscaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        Log.d("TESTE", "Chegou o ID: ${cpf}")
-
-        //findCadastro()
+          findCadastro()
     }
 
-/*    private fun findCadastro() {
-        viewModel.findCadastro().observe(this) { state ->
-            when(state){
-                is State.Success -> {
-                    binding.rv
-                }
-                is State.Error -> TODO()
-                State.Wait -> TODO()
-            }
+     private fun findCadastro() {
+         viewModel.findCadastro(cadastro.cpf).observe(this) { state ->
+             when (state) {
+                 is State.Success -> {
+                     binding.rvBankStatement.adapter = state.data?.let { CadastroStatementAdapters(it) }
+                 }
+                 is State.Error -> {
+                     state.message?.let {Snackbar.make(binding.rvBankStatement, it, Snackbar.LENGTH_LONG).show() }
 
-        }
-    }*/
+                 }
+                 State.Wait -> binding.rvBankStatement.scrollState
+             }
+         }
+     }
 
     fun voltarInicio(view: View){
         val intent = Intent(this, WelcomeActivity::class.java)
