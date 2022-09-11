@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="@+id/et_pd_nome"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_pd_nome"
         android:layout_width="300dp"
         android:layout_height="35dp"
@@ -34,28 +34,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_pd" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_pd_cpf"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/etshape"
-        android:hint="CPF"
         android:paddingStart="5dp"
         android:textColor="#a9a9a9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_pd_nome" />
 
-    <EditText
-        android:id="@+id/et_pd_status"
+    <TextView
+        android:id="@+id/et_pd_obs"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/etshape"
-        android:hint="Observaçoes"
         android:paddingStart="5dp"
         android:textColor="#a9a9a9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,28 +72,26 @@
         app:layout_constraintStart_toStartOf="@+id/tv_pd"
         app:layout_constraintTop_toBottomOf="@+id/et_pd_cpf" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_contato_nome"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/etshape"
-        android:hint="Hospital"
         android:paddingStart="5dp"
         android:textColor="#a9a9a9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_contato" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_contato_tel"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/etshape"
-        android:hint="Telefone"
         android:paddingStart="5dp"
         android:textColor="#a9a9a9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,5 +114,11 @@
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="voltarInicio"
         />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBankStatement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
