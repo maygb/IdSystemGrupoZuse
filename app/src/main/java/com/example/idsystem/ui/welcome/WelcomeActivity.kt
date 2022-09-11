@@ -1,11 +1,11 @@
-package com.example.idsystem.ui
+package com.example.idsystem.ui.welcome
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.idsystem.BuscaActivity
-import com.example.idsystem.BuscaRegistroActivity
+import com.example.idsystem.ui.statement.BuscaActivity
+import com.example.idsystem.ui.statement.BuscaRegistroActivity
 import com.example.idsystem.R
 
 class WelcomeActivity : AppCompatActivity() {
@@ -19,8 +19,4 @@ class WelcomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun buscarRegistro(view: View){
-        val intent = Intent(this, BuscaActivity::class.java)
-        startActivity(intent)
-    }
 }

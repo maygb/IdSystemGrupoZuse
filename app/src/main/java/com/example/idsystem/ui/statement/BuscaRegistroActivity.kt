@@ -1,15 +1,13 @@
-package com.example.idsystem
+package com.example.idsystem.ui.statement
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.idsystem.data.RetrofitFactory
+import com.example.idsystem.databinding.ActivityBuscaRegistroBinding
 import com.example.idsystem.domain.Cadastro
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,18 +15,21 @@ import retrofit2.Response
 
 class BuscaRegistroActivity : AppCompatActivity() {
 
+    private val binding by lazy{
+        ActivityBuscaRegistroBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_busca_registro)
+        setContentView(binding.root)
 
-        val pesquisaCPF: Button = findViewById(R.id.btn_buscar)
-        val cpf: EditText = findViewById(R.id.et_pd_nome)
-        val progress_bar: ProgressBar = findViewById(R.id.progress_bar)
+        binding.btnBuscar.setOnClickListener{
+            val cpfRecuperado = binding.etPdCpf.text.toString()
+            val cpf = Cadastro(cpfRecuperado)
+            val progress = binding.progressBar
+            val call = RetrofitFactory().retrofitService().findCpf(cpfRecuperado)
 
-        pesquisaCPF.setOnClickListener{
-            val call = RetrofitFactory().retrofitService().findCpf(cpf.text.toString())
-
-            progress_bar.visibility = View.VISIBLE
+            progress.visibility = View.VISIBLE
 
             call.enqueue(object : Callback<Cadastro> {
 
@@ -37,20 +38,20 @@ class BuscaRegistroActivity : AppCompatActivity() {
                     response.body()?.let {
                         Log.i("CPF", it.toString())
                         Toast.makeText(this@BuscaRegistroActivity, it.toString(), Toast.LENGTH_LONG).show()
-                        progress_bar.visibility = View.INVISIBLE
+                        progress.visibility = View.INVISIBLE
                     } ?: Toast.makeText(this@BuscaRegistroActivity, "CEP não localizado", Toast.LENGTH_LONG)
                         .show()
                 }
 
                 override fun onFailure(call: Call<Cadastro>?, t: Throwable?) {
                     t?.message?.let { it1 -> Log.e("Erro", it1) }
-                    progress_bar.visibility = View.INVISIBLE
+                    progress.visibility = View.INVISIBLE
                 }
             })
-        }
 
-        fun buscarRegistro(view: View){
-            val intent = Intent(this, BuscaActivity::class.java)
+            val intent = Intent(this, BuscaActivity::class.java).apply{
+                putExtra(BuscaActivity.CADASTRO_DESAPARECIDO, cpf)
+            }
             startActivity(intent)
         }
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#2d313c"
     android:padding="10dp"
-    tools:context=".ui.WelcomeActivity">
+    tools:context=".ui.welcome.WelcomeActivity">
 
     <ImageView
         android:id="@+id/imgLogo"

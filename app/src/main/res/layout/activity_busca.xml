@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2d313c"
     android:padding="10dp"
-    tools:context=".BuscaActivity">
+    tools:context=".ui.statement.BuscaActivity">
 
     <TextView
         android:id="@+id/tv_pd"
