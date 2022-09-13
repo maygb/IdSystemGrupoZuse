@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.idsystem.ui.statement.BuscaActivity
 import com.example.idsystem.ui.statement.BuscaRegistroActivity
 import com.example.idsystem.R
 

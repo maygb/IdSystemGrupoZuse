@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.example.idsystem.data.RetrofitFactory
 import com.example.idsystem.databinding.ActivityBuscaRegistroBinding
 import com.example.idsystem.domain.Cadastro
-import com.example.idsystem.domain.Pessoas
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,36 +23,38 @@ class BuscaRegistroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnBuscar.setOnClickListener{
-            val cpfRecuperado = binding.etPdCpf.text.toString()
-            val cpf = Cadastro(cpfRecuperado)
-            val progress = binding.progressBar
-            val call = RetrofitFactory().retrofitService().findCpf(cpfRecuperado)
+        binding.btnBuscar.setOnClickListener {
+                val cpfRecuperado = binding.etPdCpf.text.toString()
+                val progress = binding.progressBar
+                val call = RetrofitFactory().retrofitService().findCpf(cpfRecuperado)
 
-            progress.visibility = View.VISIBLE
+                progress.visibility = View.VISIBLE
 
-            call.enqueue(object : Call<Pessoas> {
+                call.enqueue(object : Callback<Cadastro> {
 
-                override fun onResponse(call: Call<Pessoas>, response: Response<Pessoas>) {
+                    override fun onResponse(call: Call<Cadastro>, response: Response<Cadastro>) {
 
-                    response.body()?.let {
-                        Log.i("CPF", it.toString())
-                        Toast.makeText(this@BuscaRegistroActivity, it.toString(), Toast.LENGTH_LONG).show()
+                        response.body()?.let {
+                            Log.i("CPF", it.toString())
+                            Toast.makeText(
+                                this@BuscaRegistroActivity,
+                                it.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            progress.visibility = View.INVISIBLE
+                        } ?: Toast.makeText(
+                            this@BuscaRegistroActivity,
+                            "CPF não localizado",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+
+                    override fun onFailure(call: Call<Cadastro>?, t: Throwable?) {
+                        t?.message?.let { it1 -> Log.e("Erro", it1) }
                         progress.visibility = View.INVISIBLE
-                    } ?: Toast.makeText(this@BuscaRegistroActivity, "CEP não localizado", Toast.LENGTH_LONG)
-                        .show()
-                }
-
-                override fun onFailure(call: Call<Pessoas>?, t: Throwable?) {
-                    t?.message?.let { it1 -> Log.e("Erro", it1) }
-                    progress.visibility = View.INVISIBLE
-                }
-            })
-
-            val intent = Intent(this, BuscaActivity::class.java).apply{
-                putExtra(BuscaActivity.CADASTRO_DESAPARECIDO, cpf)
-            }
-            startActivity(intent)
+                    }
+                })
         }
     }
 }
